@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoChrono - Student Relief House</title>
+  <link rel="stylesheet" href="eco.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-nav">
+    <button class="btn" onclick="toggleSidebar()" aria-label="Open Navigation Menu">☰ Menu</button>
+    <div>
+      <button class="btn" onclick="toggleTheme()" aria-label="Toggle Theme">☀️/🌙</button>
+      <a href="#" id="auth-btn" class="login-btn" onclick="handleAuthAction()">Login</a>
+    </div>
+  </header>
+
+  <!-- SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR MENU -->
+  <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+    <button class="close-btn" onclick="toggleSidebar()" aria-label="Close Menu">✖ Close</button>
+    <h3>🧠 EcoChrono</h3>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">🏠 Relief House</a></li>
+        <li><a href="#" onclick="showPage('sanctuary')">🌿 Acoustic Sanctuary</a></li>
+        <li><a href="#" onclick="showPage('history')">📜 History</a></li>
+        <li><a href="#" onclick="showPage('tech')">💻 Technology</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <!-- PAGE 1: RELIEF HOUSE (HOME) -->
+    <section id="home" class="page active">
+      
+      <!-- HERO & LOGO -->
+      <div class="hero">
+        <div class="eco-logo" aria-label="EcoChrono Logo">
+          <span class="letter-e">E</span>
+          <span class="letter-c">C</span>
+          <span class="letter-o">O</span>
+        </div>
+        <h1>ECOCHRONO</h1>
+        <p class="tagline">Your Mindful Relief &amp; Focus House</p>
+      </div>
+
+      <!-- VIRTUAL HOUSE ROOMS -->
+      <h2 class="section-heading">🏡 Step Into Your Relief House</h2>
+      <div class="house-container">
+
+        <!-- ROOM 1: BALCONY -->
+        <article class="room-card room-balcony">
+          <h3>🌧️ Room 1: The Cozy Balcony</h3>
+          <p>Listen to gentle balcony rainfall and forest birds.</p>
+          <div class="control">
+            <label for="rain-slider">🌧️ Gentle Rain:</label>
+            <input type="range" id="rain-slider" min="0" max="1" step="0.05" value="0">
+          </div>
+          <div class="control">
+            <label for="birds-slider">🍃 Forest Birds:</label>
+            <input type="range" id="birds-slider" min="0" max="1" step="0.05" value="0">
+          </div>
+        </article>
+
+        <!-- ROOM 2: LOUNGE -->
+        <article class="room-card room-lounge">
+          <h3>🌊 Room 2: Ocean View Lounge</h3>
+          <p>Feel the calming deep ocean waves from the lounge window.</p>
+          <div class="control">
+            <label for="ocean-slider">🌊 Ocean Waves:</label>
+            <input type="range" id="ocean-slider" min="0" max="1" step="0.05" value="0">
+          </div>
+        </article>
+
+        <!-- ROOM 3: MUSIC STUDIO -->
+        <article class="room-card room-studio">
+          <h3>🎵 Room 3: Student Music Studio</h3>
+          <p>Search any movie soundtrack, lofi beats, or favorite study music!</p>
+          <div class="search-box">
+            <input 
+              type="text" 
+              id="music-search" 
+              placeholder="Type song or movie (e.g., Interstellar, Lofi Beats)..."
+              onkeydown="if(event.key === 'Enter') searchMusic()"
+            >
+            <button onclick="searchMusic()">🔍 Search</button>
+          </div>
+          <div id="search-result" class="search-result">
+            <p>👇 Click search to launch tracks on YouTube</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PAGE 2: ACOUSTIC SANCTUARY -->
+    <section id="sanctuary" class="page">
+      <div class="card">
+        <h2>🌿 Acoustic Sanctuary</h2>
+        <p>Use the Relief House sound controls on the Home page to customize your ambient soundscape!</p>
+      </div>
+    </section>
+
+    <!-- PAGE 3: HISTORY -->
+    <section id="history" class="page">
+      <div class="card">
+        <h2>📜 History Eras</h2>
+        <article class="info-box">
+          <h3>🏛️ Place: Hampi, Karnataka</h3>
+          <p>UNESCO World Heritage Site along the Tungabhadra River. Capital of the Vijayanagara Empire.</p>
+        </article>
+        <article class="info-box">
+          <h3>👤 Person: Shaheed Bhagat Singh</h3>
+          <p>Revolutionary freedom fighter whose courage inspired millions across India.</p>
+        </article>
+        <article class="info-box">
+          <h3>🛕 Temple: Chennakeshava Temple, Belur</h3>
+          <p>A 12th-century Hoysala architectural marvel carved out of soapstone.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 4: TECHNOLOGY -->
+    <section id="tech" class="page">
+      <div class="card">
+        <h2>💻 Modern Technology</h2>
+        <article class="info-box">
+          <h3>🌾 Smart Agriculture (AgriTech)</h3>
+          <p>Modern farming leveraging IoT soil sensors, crop-monitoring drones, and automated drip irrigation systems.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 5: LOGIN PAGE VIEW -->
+    <section id="login" class="page">
+      <div class="login-container">
+        <div class="login-header">
+          <h2>Welcome Back</h2>
+          <p>Sign in to save your custom study soundscapes</p>
+        </div>
+
+        <form id="login-form" onsubmit="submitLogin(event)">
+          <div class="form-group">
+            <label for="email">Student Email or Username</label>
+            <input type="text" id="email" placeholder="student@university.edu" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+
+        <div class="login-footer">
+          <p>Don't have an account? <a href="#" onclick="alert('Demo Mode: Type any credentials and click Sign In!')">Create one</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- AMBIENT AUDIO SOURCES -->
+  <audio id="audio-rain" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db6591201e.mp3?filename=gentle-rain-16160.mp3"></audio>
+  <audio id="audio-birds" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c889a7a7.mp3?filename=birds-113000.mp3"></audio>
+  <audio id="audio-ocean" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c295796a56.mp3?filename=ocean-waves-112906.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
