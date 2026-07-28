@@ -12,6 +12,7 @@
   <header class="top-nav">
     <button class="btn" onclick="toggleSidebar()" aria-label="Open Navigation Menu">☰ Menu</button>
     <div>
+      <button class="btn" onclick="showPage('home')" aria-label="Back to Home">⬅️ Back to Home</button>
       <button class="btn" onclick="toggleTheme()" aria-label="Toggle Theme">☀️/🌙</button>
       <a href="#" id="auth-btn" class="login-btn" onclick="handleAuthAction()">Login</a>
     </div>
@@ -23,13 +24,18 @@
   <!-- SIDEBAR MENU -->
   <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
     <button class="close-btn" onclick="toggleSidebar()" aria-label="Close Menu">✖ Close</button>
-    <h3>🧠 EcoChrono</h3>
+    <h3>🧠 EcoChrono Navigation</h3>
     <nav>
       <ul>
         <li><a href="#" onclick="showPage('home')">🏠 Relief House</a></li>
-        <li><a href="#" onclick="showPage('sanctuary')">🌿 Acoustic Sanctuary</a></li>
         <li><a href="#" onclick="showPage('history')">📜 History</a></li>
         <li><a href="#" onclick="showPage('tech')">💻 Technology</a></li>
+        <li><a href="#" onclick="showPage('novels')">📚 Novels &amp; Books</a></li>
+        <li><a href="#" onclick="showPage('games')">🎮 Video Games</a></li>
+        <li><a href="#" onclick="showPage('sports')">🤼 Sports (Kabaddi)</a></li>
+        <li><a href="#" onclick="showPage('art')">🎨 Mindful Art</a></li>
+        <li><a href="#" onclick="showPage('yoga')">🧘 Yoga &amp; Wellness</a></li>
+        <li><a href="#" onclick="showPage('puzzles')">🧩 Mindful Puzzles</a></li>
       </ul>
     </nav>
   </aside>
@@ -37,33 +43,47 @@
   <main>
     <!-- PAGE 1: RELIEF HOUSE (HOME) -->
     <section id="home" class="page active">
-      
-      <!-- HERO & LOGO -->
       <div class="hero">
-        <div class="eco-logo" aria-label="EcoChrono Logo">
-          <span class="letter-e">E</span>
-          <span class="letter-c">C</span>
-          <span class="letter-o">O</span>
+        
+        <!-- LOGO DISPLAY -->
+        <div class="logo-container">
+          <div class="logo-row">
+            <span class="letter-e">E</span>
+            <span class="letter-c1">C</span>
+            <span class="letter-o1">O</span>
+          </div>
+          <div class="logo-row">
+            <span class="letter-c2">C</span>
+            <span class="letter-h">H</span>
+            <span class="letter-r">R</span>
+            <span class="letter-o2">O</span>
+            <span class="letter-n">N</span>
+            <span class="letter-o3">O</span>
+          </div>
         </div>
-        <h1>ECOCHRONO</h1>
+
         <p class="tagline">Your Mindful Relief &amp; Focus House</p>
       </div>
 
-      <!-- VIRTUAL HOUSE ROOMS -->
       <h2 class="section-heading">🏡 Step Into Your Relief House</h2>
       <div class="house-container">
 
-        <!-- ROOM 1: BALCONY -->
+        <!-- ROOM 1: BALCONY (NEW RELIEF SOUNDS) -->
         <article class="room-card room-balcony">
-          <h3>🌧️ Room 1: The Cozy Balcony</h3>
-          <p>Listen to gentle balcony rainfall and forest birds.</p>
+          <h3>🌅 Room 1: Mindful Relief Sanctuary</h3>
+          <p>Customize ambient sounds to sleep deeply, study with sharp focus, and keep your mind fresh.</p>
+          
           <div class="control">
-            <label for="rain-slider">🌧️ Gentle Rain:</label>
-            <input type="range" id="rain-slider" min="0" max="1" step="0.05" value="0">
+            <label for="sleep-slider">🌙 Deep Sleep Waves:</label>
+            <input type="range" id="sleep-slider" min="0" max="1" step="0.05" value="0">
           </div>
           <div class="control">
-            <label for="birds-slider">🍃 Forest Birds:</label>
-            <input type="range" id="birds-slider" min="0" max="1" step="0.05" value="0">
+            <label for="study-slider">📚 Focus Study Drone:</label>
+            <input type="range" id="study-slider" min="0" max="1" step="0.05" value="0">
+          </div>
+          <div class="control">
+            <label for="refresh-slider">🍃 Mind Refreshing Breeze:</label>
+            <input type="range" id="refresh-slider" min="0" max="1" step="0.05" value="0">
           </div>
         </article>
 
@@ -98,36 +118,21 @@
       </div>
     </section>
 
-    <!-- PAGE 2: ACOUSTIC SANCTUARY -->
-    <section id="sanctuary" class="page">
-      <div class="card">
-        <h2>🌿 Acoustic Sanctuary</h2>
-        <p>Use the Relief House sound controls on the Home page to customize your ambient soundscape!</p>
-      </div>
-    </section>
-
-    <!-- PAGE 3: HISTORY -->
+    <!-- OTHER NAVIGATION PAGES -->
     <section id="history" class="page">
       <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
         <h2>📜 History Eras</h2>
         <article class="info-box">
           <h3>🏛️ Place: Hampi, Karnataka</h3>
           <p>UNESCO World Heritage Site along the Tungabhadra River. Capital of the Vijayanagara Empire.</p>
         </article>
-        <article class="info-box">
-          <h3>👤 Person: Shaheed Bhagat Singh</h3>
-          <p>Revolutionary freedom fighter whose courage inspired millions across India.</p>
-        </article>
-        <article class="info-box">
-          <h3>🛕 Temple: Chennakeshava Temple, Belur</h3>
-          <p>A 12th-century Hoysala architectural marvel carved out of soapstone.</p>
-        </article>
       </div>
     </section>
 
-    <!-- PAGE 4: TECHNOLOGY -->
     <section id="tech" class="page">
       <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
         <h2>💻 Modern Technology</h2>
         <article class="info-box">
           <h3>🌾 Smart Agriculture (AgriTech)</h3>
@@ -136,39 +141,99 @@
       </div>
     </section>
 
-    <!-- PAGE 5: LOGIN PAGE VIEW -->
+    <section id="novels" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>📚 Famous Novels &amp; Books</h2>
+        <article class="info-box">
+          <h3>📖 Classic Novel: "To Kill a Mockingbird" by Harper Lee</h3>
+          <p>A Pulitzer Prize-winning masterpiece exploring empathy and moral courage.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="games" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>🎮 Video Games</h2>
+        <article class="info-box">
+          <h3>🗡️ Masterpiece: "The Legend of Zelda: Breath of the Wild"</h3>
+          <p>An open-world benchmark in exploration and physics puzzles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sports" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>🤼 Sports Showcase: Kabaddi</h2>
+        <article class="info-box">
+          <h3>🏆 The Ancient Game of Tactics &amp; Strength</h3>
+          <p>High-octane contact sport from ancient India.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="art" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>🎨 Mindful Art</h2>
+        <article class="info-box">
+          <h3>🌀 Mandala Art &amp; Patterns</h3>
+          <p>Symmetrical line work that calms the mind and grounds focus.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="yoga" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>🧘 Yoga &amp; Wellness</h2>
+        <article class="info-box">
+          <h3>🌬️ Pranayama &amp; Surya Namaskar</h3>
+          <p>Controlled breathwork and physical flow for active focus.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="puzzles" class="page">
+      <div class="card">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>🧩 Mindful Focus Puzzles</h2>
+        <div class="puzzle-container">
+          <div class="puzzle-header">
+            <span>Moves: <strong id="move-count">0</strong></span>
+            <button class="btn" onclick="resetPuzzleGame()">🔄 Restart Game</button>
+          </div>
+          <div id="memory-grid" class="memory-grid"></div>
+        </div>
+      </div>
+    </section>
+
     <section id="login" class="page">
       <div class="login-container">
-        <div class="login-header">
-          <h2>Welcome Back</h2>
-          <p>Sign in to save your custom study soundscapes</p>
-        </div>
-
-        <form id="login-form" onsubmit="submitLogin(event)">
+        <button class="btn back-btn" onclick="showPage('home')">⬅️ Back to Relief House</button>
+        <h2>Welcome Back</h2>
+        <form id="login-form" onsubmit="submitAuth(event)">
           <div class="form-group">
-            <label for="email">Student Email or Username</label>
-            <input type="text" id="email" placeholder="student@university.edu" required>
+            <label for="email">Student Email</label>
+            <input type="email" id="email" required>
           </div>
-
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="••••••••" required>
+            <input type="password" id="password" required>
           </div>
-
-          <button type="submit" class="submit-btn">Sign In</button>
+          <button type="submit" id="submit-btn" class="submit-btn">Sign In</button>
         </form>
-
-        <div class="login-footer">
-          <p>Don't have an account? <a href="#" onclick="alert('Demo Mode: Type any credentials and click Sign In!')">Create one</a></p>
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- AMBIENT AUDIO SOURCES -->
-  <audio id="audio-rain" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db6591201e.mp3?filename=gentle-rain-16160.mp3"></audio>
-  <audio id="audio-birds" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c889a7a7.mp3?filename=birds-113000.mp3"></audio>
-  <audio id="audio-ocean" loop preload="none" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c295796a56.mp3?filename=ocean-waves-112906.mp3"></audio>
+  <!-- DIRECT WORKING SOUND STREAMS FOR SLEEP, STUDY & REFRESH -->
+  <audio id="audio-sleep" loop src="deep sleep music 5 min,deep sleep relaxing music for sleeping,5 minute relaxation music for sleep - Meditate (youtube).mp3"></audio>
+  <audio id="audio-study" loop src="Get More Brain Power! 5-Minute Brainwave Music Quick Booster for Work & Study. Get Focused Instantly - Brainwave Music (youtube).mp3"></audio>
+  <audio id="audio-refresh" loop src="5 Minute Meditation Music for Instant Inner Peace - 5 Minutes by Great Meditation (youtube).mp3"></audio>
+  <audio id="audio-ocean" loop src="Sea Waves 5 Minute Meditation - 5 Minute Meditation (youtube).mp3"></audio>
 
   <script src="script.js"></script>
 </body>

@@ -1,14 +1,14 @@
 /* ==========================================
-   1. VARIABLES & THEME DEFINITIONS
+   1. BASE STYLES & THEMES
    ========================================== */
 :root {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
+  --bg-primary: #0f172a;   /* Original Dark Slate Blue */
+  --bg-secondary: #1e293b; /* Original Card Background */
   --bg-input: #0f172a;
   --text-main: #ffffff;
   --text-muted: #94a3b8;
   --border-color: #334155;
-  --accent-blue: #38bdf8;
+  --accent-blue: #38bdf8;  /* Original Cyan Accent */
   --accent-green: #34d399;
   --accent-gold: #fbbf24;
   --shadow: rgba(0, 0, 0, 0.3);
@@ -24,9 +24,6 @@ body.light {
   --shadow: rgba(0, 0, 0, 0.08);
 }
 
-/* ==========================================
-   2. RESET & BASE STYLES
-   ========================================== */
 * {
   margin: 0;
   padding: 0;
@@ -42,17 +39,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ==========================================
-   3. PAGE CONTROLS & NAVIGATION
-   ========================================== */
-.page { 
-  display: none; 
-  padding: 20px; 
-}
-
-.page.active { 
-  display: block; 
-}
+.page { display: none; padding: 20px; }
+.page.active { display: block; }
 
 .top-nav {
   display: flex;
@@ -90,30 +78,21 @@ body {
   cursor: pointer;
 }
 
-/* ==========================================
-   4. SIDEBAR MENU & OVERLAY
-   ========================================== */
+.back-btn { margin-bottom: 15px; display: inline-block; }
+
+/* SIDEBAR MENU & OVERLAY */
 .sidebar-overlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
 }
-
-.sidebar-overlay.active {
-  display: block;
-}
+.sidebar-overlay.active { display: block; }
 
 .sidebar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100%;
+  top: 0; left: 0; width: 260px; height: 100%;
   background-color: var(--bg-secondary);
   padding: 20px;
   text-align: left;
@@ -121,11 +100,9 @@ body {
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   box-shadow: 4px 0 12px var(--shadow);
+  overflow-y: auto;
 }
-
-.sidebar.active { 
-  transform: translateX(0); 
-}
+.sidebar.active { transform: translateX(0); }
 
 .close-btn {
   background: none;
@@ -137,57 +114,75 @@ body {
   font-weight: bold;
 }
 
-.sidebar ul { 
-  list-style: none; 
-  margin-top: 15px; 
-}
-
-.sidebar ul li { 
-  margin-bottom: 15px; 
-}
-
-.sidebar ul li a { 
-  color: var(--accent-blue); 
-  text-decoration: none; 
-  font-weight: 500;
-}
+.sidebar ul { list-style: none; margin-top: 15px; }
+.sidebar ul li { margin-bottom: 15px; }
+.sidebar ul li a { color: var(--accent-blue); text-decoration: none; font-weight: 500; }
 
 /* ==========================================
-   5. LOGO & HERO SECTION
+   2. LOGO DISPLAY: NO GLOW / STROKE
    ========================================== */
-.hero { padding: 20px 10px; }
-.hero h1 { color: var(--accent-blue); margin-top: 10px; letter-spacing: 2px; }
-.tagline { color: var(--text-muted); font-style: italic; margin-top: 5px; }
+.hero { padding: 30px 10px; }
+.tagline { color: var(--accent-blue); font-size: 1.1rem; font-weight: 600; margin-top: 15px; }
 
-.eco-logo span {
-  font-size: 90px;
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-row span {
+  font-size: 85px;
   font-weight: 900;
-  font-family: 'Impact', sans-serif;
-  margin: 0 4px;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  line-height: 1;
+  display: inline-block;
+  padding: 4px 10px;
+
+  /* Cutout photo clipping */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
   background-size: cover;
   background-position: center;
-  display: inline-block;
+
+  /* CLEAN CUTOUTS - NO GLOW OR STROKE */
+  filter: none;
+  -webkit-text-stroke: 0px transparent;
 }
 
-.letter-e { background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400'); }
-.letter-c { background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400'); }
-.letter-o { background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=400'); }
+/* HIGH-CONTRAST THEMED PHOTOS FOR EVERY LETTER */
+.letter-e  { background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400'); } /* Ocean */
+.letter-c1 { background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400'); } /* Taj Mahal / History */
+.letter-o1 { background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=400'); } /* Circuit / Technology */
+
+.letter-c2 { background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400'); } /* Library / Novels */
+.letter-h  { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400'); } /* Video Games */
+.letter-r  { background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400'); } /* Sports (Cricket Stadium) */
+.letter-o2 { background-image: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400'); } /* Mindful Art (Artist Mandala Painting) */
+.letter-n  { background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400'); } /* Sunrise Yoga */
+.letter-o3 { background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400'); } /* Starry Sky */
+
+@media (max-width: 600px) {
+  .logo-row span {
+    font-size: 48px;
+    padding: 2px 5px;
+  }
+}
 
 /* ==========================================
-   6. VIRTUAL HOUSE ROOM LAYOUT & CARDS
+   3. ROOM CARDS & LAYOUTS
    ========================================== */
 .section-heading { color: var(--accent-blue); margin: 20px 0 10px; }
-
-.house-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-}
+.house-container { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto; }
 
 .room-card, .card {
   background: var(--bg-secondary);
@@ -198,174 +193,72 @@ body {
   box-shadow: 0 4px 12px var(--shadow);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-.card {
-  max-width: 550px;
-  margin: 20px auto;
-  border-left: none;
-}
+.card { max-width: 650px; margin: 20px auto; border-left: 5px solid var(--accent-blue); }
 
 .room-balcony { border-left-color: var(--accent-green); }
 .room-lounge  { border-left-color: var(--accent-blue); }
 .room-studio  { border-left-color: var(--accent-gold); }
 
-.room-card h3, .card h3 { 
-  margin-bottom: 8px; 
-  color: var(--text-main); 
-}
+.room-card h3, .card h3 { margin-bottom: 8px; color: var(--text-main); }
+.room-card p, .card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
 
-.room-card p, .card p { 
-  font-size: 0.9rem; 
-  color: var(--text-muted); 
-  margin-bottom: 15px; 
-}
+.control { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.control input[type="range"] { accent-color: var(--accent-blue); cursor: pointer; width: 50%; }
 
-.control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
+.search-box { display: flex; gap: 10px; }
+.search-box input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); outline: none; }
+.search-box button { padding: 10px 18px; background: var(--accent-blue); border: none; color: #000; font-weight: bold; border-radius: 6px; cursor: pointer; }
 
-.control input[type="range"] {
-  accent-color: var(--accent-blue);
-  cursor: pointer;
-  width: 50%;
-}
+.info-box { background: var(--bg-input); padding: 14px; border-radius: 6px; margin-top: 12px; border: 1px solid var(--border-color); }
+.info-box h3 { color: var(--accent-blue); margin-bottom: 5px; }
 
-/* SEARCH & INFO BOXES */
-.search-box {
-  display: flex;
+/* Memory Puzzle Styling */
+.puzzle-container { margin-top: 15px; }
+.puzzle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-}
-
-.search-box input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-input);
-  color: var(--text-main);
-  outline: none;
-}
-
-.search-box button {
-  padding: 10px 18px;
-  background: var(--accent-blue);
-  border: none;
-  color: #000;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.search-box button:hover {
-  opacity: 0.9;
-}
-
-.search-result {
-  margin-top: 15px;
-  font-size: 0.9rem;
-}
-
-.info-box {
-  background: var(--bg-input);
-  padding: 14px;
-  border-radius: 6px;
-  margin-top: 12px;
-  border: 1px solid var(--border-color);
-}
-
-.info-box h3 { 
-  color: var(--accent-blue); 
-  margin-bottom: 5px; 
-}
-
-/* ==========================================
-   7. LOGIN PAGE STYLES
-   ========================================== */
-.login-container {
   max-width: 400px;
-  margin: 40px auto 20px;
-  padding: 30px;
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px var(--shadow);
-  border: 1px solid var(--border-color);
-  text-align: left;
+  margin: 0 auto;
 }
-
-.login-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.login-header h2 {
-  color: var(--accent-blue);
-  margin-top: 8px;
-}
-
-.login-header p {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-top: 4px;
-}
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
+.memory-card {
+  aspect-ratio: 1;
   background: var(--bg-input);
-  color: var(--text-main);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s, background-color 0.2s;
 }
-
-.form-group input:focus {
+.memory-card.flipped {
+  background: var(--accent-blue);
   border-color: var(--accent-blue);
 }
 
-.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background: var(--accent-blue);
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: opacity 0.2s;
+/* ==========================================
+   4. AUTHENTICATION CONTAINER
+   ========================================== */
+.login-container { 
+  max-width: 400px; 
+  margin: 40px auto; 
+  padding: 30px; 
+  background: var(--bg-secondary); 
+  border-radius: 12px; 
+  border: 1px solid var(--border-color); 
+  text-align: left; 
+  box-shadow: 0 8px 24px var(--shadow);
 }
-
-.submit-btn:hover {
-  opacity: 0.9;
-}
-
-.login-footer {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.login-footer a {
-  color: var(--accent-blue);
-  text-decoration: none;
-}
+.login-header { text-align: center; margin-bottom: 20px; }
+.login-header h2 { color: var(--accent-blue); }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+.form-group input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); outline: none; }
+.submit-btn { width: 100%; padding: 12px; background: var(--accent-blue); color: #000; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+.auth-message { font-size: 0.85rem; text-align: center; margin-bottom: 12px; font-weight: 600; }
+.auth-message.error { color: #f87171; }
+.auth-message.success { color: var(--accent-green); }
