@@ -2,13 +2,13 @@
    1. BASE STYLES & THEMES
    ========================================== */
 :root {
-  --bg-primary: #0f172a;   /* Original Dark Slate Blue */
-  --bg-secondary: #1e293b; /* Original Card Background */
+  --bg-primary: #0f172a;   /* Dark Slate Blue */
+  --bg-secondary: #1e293b; /* Card Background */
   --bg-input: #0f172a;
   --text-main: #ffffff;
   --text-muted: #94a3b8;
   --border-color: #334155;
-  --accent-blue: #38bdf8;  /* Original Cyan Accent */
+  --accent-blue: #38bdf8;  /* Cyan Accent */
   --accent-green: #34d399;
   --accent-gold: #fbbf24;
   --shadow: rgba(0, 0, 0, 0.3);
@@ -166,8 +166,8 @@ body {
 
 .letter-c2 { background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400'); } /* Library / Novels */
 .letter-h  { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400'); } /* Video Games */
-.letter-r  { background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400'); } /* Sports (Cricket Stadium) */
-.letter-o2 { background-image: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400'); } /* Mindful Art (Artist Mandala Painting) */
+.letter-r  { background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400'); } /* Sports */
+.letter-o2 { background-image: url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400'); } /* Mindful Art */
 .letter-n  { background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400'); } /* Sunrise Yoga */
 .letter-o3 { background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400'); } /* Starry Sky */
 
@@ -211,6 +211,17 @@ body {
 
 .info-box { background: var(--bg-input); padding: 14px; border-radius: 6px; margin-top: 12px; border: 1px solid var(--border-color); }
 .info-box h3 { color: var(--accent-blue); margin-bottom: 5px; }
+
+/* Section Content Images */
+.section-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow);
+}
 
 /* Memory Puzzle Styling */
 .puzzle-container { margin-top: 15px; }
