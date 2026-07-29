@@ -6,21 +6,21 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Enable CORS and JSON parsing
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize SQLite Database
+// Connect or create SQLite database file
 const db = new sqlite3.Database('./database.db', (err) => {
   if (err) {
     console.error('Error opening database:', err.message);
   } else {
-    console.log('Connected to SQLite database.');
+    console.log('✅ Connected to SQLite database (database.db)');
   }
 });
 
-// SQL SCHEMA: Create Tables for Users & Preferences
+// Create tables for Users and Login History
 db.serialize(() => {
   // Users Table
   db.run(`
@@ -32,21 +32,19 @@ db.serialize(() => {
     )
   `);
 
-  // User Soundscape Preferences Table
+  // Login History Table (Tracks logins in database)
   db.run(`
-    CREATE TABLE IF NOT EXISTS preferences (
+    CREATE TABLE IF NOT EXISTS login_history (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id INTEGER UNIQUE,
-      rain_vol REAL DEFAULT 0,
-      birds_vol REAL DEFAULT 0,
-      ocean_vol REAL DEFAULT 0,
-      favorite_category TEXT DEFAULT 'home',
-      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+      user_id INTEGER,
+      email TEXT NOT NULL,
+      login_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(user_id) REFERENCES users(id)
     )
   `);
 });
 
-// API: Register User
+// API Endpoint: Register User
 app.post('/api/register', (req, res) => {
   const { email, password } = req.body;
 
@@ -58,25 +56,21 @@ app.post('/api/register', (req, res) => {
   db.run(sql, [email, password], function (err) {
     if (err) {
       if (err.message.includes('UNIQUE constraint failed')) {
-        return res.status(400).json({ error: 'Account already exists for this email.' });
+        return res.status(400).json({ error: 'Account already exists with this email.' });
       }
       return res.status(500).json({ error: err.message });
     }
 
     const userId = this.lastID;
 
-    // Initialize default preferences for new user
-    db.run(`INSERT INTO preferences (user_id) VALUES (?)`, [userId], (prefErr) => {
-      if (prefErr) {
-        console.error('Error creating default preferences:', prefErr.message);
-      }
-    });
+    // Log initial registration in history table
+    db.run(`INSERT INTO login_history (user_id, email) VALUES (?, ?)`, [userId, email]);
 
     res.json({ message: 'Account created successfully!', userId });
   });
 });
 
-// API: Login User
+// API Endpoint: Login User
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -89,63 +83,31 @@ app.post('/api/login', (req, res) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
+
     if (!row) {
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
 
-    const username = row.email.split('@')[0];
-    res.json({ 
-      message: 'Login successful!', 
-      userId: row.id,
-      username, 
-      email: row.email 
+    // Record login timestamp in database
+    db.run(`INSERT INTO login_history (user_id, email) VALUES (?, ?)`, [row.id, row.email], (histErr) => {
+      if (histErr) {
+        console.error('Error logging history:', histErr.message);
+      } else {
+        console.log(`📝 Recorded login history in database for: ${row.email}`);
+      }
     });
-  });
-});
 
-// API: Get User Soundscape Preferences
-app.get('/api/preferences/:userId', (req, res) => {
-  const { userId } = req.params;
-
-  const sql = `SELECT * FROM preferences WHERE user_id = ?`;
-  db.get(sql, [userId], (err, row) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    if (!row) {
-      return res.status(404).json({ error: 'Preferences not found.' });
-    }
-    res.json({ preferences: row });
-  });
-});
-
-// API: Save or Update User Soundscape Preferences
-app.post('/api/preferences/save', (req, res) => {
-  const { userId, rain_vol, birds_vol, ocean_vol, favorite_category } = req.body;
-
-  if (!userId) {
-    return res.status(400).json({ error: 'User ID is required.' });
-  }
-
-  const sql = `
-    INSERT INTO preferences (user_id, rain_vol, birds_vol, ocean_vol, favorite_category)
-    VALUES (?, ?, ?, ?, ?)
-    ON CONFLICT(user_id) DO UPDATE SET
-      rain_vol = excluded.rain_vol,
-      birds_vol = excluded.birds_vol,
-      ocean_vol = excluded.ocean_vol,
-      favorite_category = excluded.favorite_category
-  `;
-
-  db.run(sql, [userId, rain_vol, birds_vol, ocean_vol, favorite_category], function (err) {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ message: 'Settings saved successfully!' });
+    const username = row.email.split('@')[0];
+    res.json({
+      message: 'Login successful!',
+      userId: row.id,
+      username: username,
+      email: row.email
+    });
   });
 });
 
 // Start Express Server
 app.listen(PORT, () => {
-  console.log(`EcoChrono server running at http://localhost:${PORT}`);
+  console.log(`🚀 EcoChrono server running at http://localhost:${PORT}`);
 });
